@@ -42,4 +42,4 @@ Develop SQL-based analytics to deliver detailed insights into:
 These insights empower stakeholders with key business metrics, enabling strategic decision-making.
 
 
-MIT License: Free to use with appropriate attribution. This repo is based on a coding project from Data With Baraa (shout out to Baraa Khatib Salkini, an excellent digital mentor!)
+*MIT License: Free to use with appropriate attribution. This repo is based on a coding project from Data With Baraa (shout out to Baraa Khatib Salkini, an excellent digital mentor!)*
