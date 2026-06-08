@@ -1,5 +1,7 @@
 # Hello! 
 
+This is a modern SQL data warehouse using SQL Server including ETL processes, data modeling, and analytics 
+
 This project is in two parts. 
 
 Part 1: an SQL Data Warehouse following modern architectural standards using ETL processes, data modeling in the star schema and medallion architecture. 
