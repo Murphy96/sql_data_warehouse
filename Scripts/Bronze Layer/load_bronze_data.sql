@@ -8,8 +8,9 @@ Purpose:
 Preforms the following actions: 
     - Truncates bronze tables before loading data
     - Uses BULK INSERT to load data from CSV files to bronze tables. 
-    - error handling, duration tracking for load to identify bottlenecks, 
-      optimize performance, monitor trends, and dectect issues on load. 
+    - Uses PRINT for error handling, duration tracking for load to identify bottlenecks, 
+      optimize performance, monitor trends, and dectect issues on load printed in messages 
+
 Parameters: 
   None, this stored procedure does not accept any parameters or return any values 
 
