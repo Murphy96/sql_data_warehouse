@@ -4,6 +4,7 @@ Script for creating empty bronze layer tables
 *********************************************
 
 Purpose: 
+DDL Structure for Bronze Layer.
 Creates empty tables for the bronze layer following the naming conventions of tables named for their source systems 
 and columns named for the columns from their source system. 
 
