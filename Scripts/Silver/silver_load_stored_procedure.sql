@@ -1,4 +1,31 @@
+/*
+*********************************************************************************************************************
+Stored Procedure for Bronze Layer Data Load (Source -> Bronze)
+*********************************************************************************************************************
+Purpose: 
+  Creates a stored procedure for loading raw data from CSV files into the Bronze Layer
+  
+Preforms the following actions: 
+    - Truncates silver tables before loading data 
+	- Transformations: 
+		- Data Cleansing
+		- Data Standardizations
+		- Data Normalization 
+		- Derived Columns added for Meta Data
+		- Data Enrichment 
 
+    - Uses PRINT for error handling, duration tracking for load to identify bottlenecks, 
+      optimize performance, monitor trends, and dectect issues on load printed in messages 
+
+Parameters: 
+  None, this stored procedure does not accept any parameters or return any values 
+
+Usage Exmple: 
+  EXEC silver.load_silver;
+
+*/
+
+-- Error handling, duration tracking to identify bottlenecks, optimize performance, monitor trends and detect issues 
 
 
 CREATE or ALTER PROCEDURE silver.load_silver AS 
