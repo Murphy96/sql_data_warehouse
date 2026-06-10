@@ -7,12 +7,6 @@ Purpose:
 Creates table structure for the silver layer following the naming conventions of tables named for their source systems 
 and columns named for the columns from their source system. 
 
-Transformations: 
-- Data Cleansing
-- Data Standardizations
-- Data Normalization 
-- Derived Columns added for Meta Data
-- Data Enrichment 
 
 WARNING
 **********************************************************************************************************************************
