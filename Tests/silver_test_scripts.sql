@@ -1,4 +1,23 @@
 /*
+*******************************************************************************************
+Quality Checks
+*******************************************************************************************
+
+Script Purpose: 
+	This cript performs various quality checks for data consistency, accuracy, and 
+	standardization across the silver schema. It includes checks for: 
+		- Null or duplicate primary keys
+		- Unwanted spaces in string fields
+		- Data standarization and consistency
+		- Invalid date ranges and orders
+		- Data consistency between related fields. 
+
+Usage Notes: 
+	- Run after loading Silver Layer
+	- Resolve any discrepancies found during check based on expected results 
+
+
+/*
 *****************************************************************
 Silver Layer Test Scripts: crm_cust_info  
 *****************************************************************
