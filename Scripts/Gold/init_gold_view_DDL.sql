@@ -2,6 +2,16 @@
 **************************************************
 Script for creating structure for gold layer view
 **************************************************
+Purpose: 
+Creates views for the gold layer, the final, business ready, layer in the data warehouse. 
+The layer organizes data into business objects as fact and dimension tables in the star schema. 
+
+The views preform transformations and combines data from the silver layer to produce a clean, enriched, 
+business-analysis ready dataset. 
+
+Usage: 
+The views can be directly queried for analytics and reporting. 
+
 */
 
 
