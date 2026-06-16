@@ -17,8 +17,11 @@ The views can be directly queried for analytics and reporting.
 
 
 
-
---Creating customer object (Dimension Table)
+/*
+*****************************************************
+Create Customer Object (Dimension Table)
+*****************************************************
+*/
 IF OBJECT_ID('gold.dim_customers', 'V') IS NOT NULL
 	DROP VIEW gold.dim_customers; 
 
@@ -46,8 +49,11 @@ ON		  ci.cst_key = ca.cid
 LEFT JOIN silver.erp_loc_a101 la
 ON		  ci.cst_key = la.cid
 
-
--- Creating Product Object (Dimension Table)
+/*
+*****************************************************
+Create Product Object (Dimension Table)
+*****************************************************
+*/
 
 IF OBJECT_ID('gold.dim_products', 'V') IS NOT NULL
 	DROP VIEW gold.dim_products; 
@@ -75,7 +81,11 @@ ON pn.cat_id = pc.id
 WHERE prd_end_dt IS NULL --Historization in table, prd_end_dt is null where the product is most current verison
 
 
---Creating Sales Object View (Fact Table)
+/*
+*****************************************************
+Create Sales Object (Fact Table)
+*****************************************************
+*/
 
 IF OBJECT_ID('gold.fact_sales', 'V') IS NOT NULL
 	DROP VIEW gold.fact_sales; 
