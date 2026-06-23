@@ -1,14 +1,31 @@
--- EDA Project
+/*
+***************************************************************************************************************
+Scripts for Exploratory Data Analysis (Run on Gold Layer)
+***************************************************************************************************************
+Purpose: 
+	A collection of scripts for performing 5 major catagories of Exploratory Data Analysis (EDA)
 
--- Database Exploration 
+Performs the following explorations: 	
+ 	1) Dimension Exploration
+	2) Date Exploration
+	3) Measures Exploration 
+	4) Magnitude Exploration 
+	5) Ranking Exploration 
+
+Usage: 
+	This file is a collection of independent scripts. The file is not meant for producing a single report. For best 
+	performance, run each query seperately, as needed. 
+
+*/
+
+
 
 /*
 *********************************
 Dimension Exploration 
 *********************************
--An exploration of granularity 
+-Exploration of granularity 
 */
-
 
 
 -- Explore All Countries Orders Placed In 
@@ -17,7 +34,11 @@ SELECT DISTINCT country FROM gold.dim_customers
 
 -- Explore All Categories Lines for Products 
 
-SELECT DISTINCT catagory, subcatagory, product_name FROM gold.dim_products
+SELECT DISTINCT 
+	catagory, 
+	subcatagory, 
+	product_name 
+FROM gold.dim_products
 ORDER BY 1,2,3
 
 -- in this data set: 
@@ -39,13 +60,13 @@ An exploration of range:
 */
 
 
+-- Range of Dates of Orders in Dataset by Year, Month, and Days between First and Last Order 
 SELECT 
-MIN(order_date) AS first_order_date, 
-MAX(order_date) AS last_order_date, 
-DATEDIFF(year, MIN(order_date), MAX(order_date)) AS order_range_years,
-DATEDIFF(MONTH, MIN(order_date), MAX(order_date)) AS order_range_months,
-DATEDIFF(DAY, MIN(order_date), MAX(order_date)) AS order_range_days
-
+	MIN(order_date) AS first_order_date, 
+	MAX(order_date) AS last_order_date, 
+	DATEDIFF(year, MIN(order_date), MAX(order_date)) AS order_range_years,
+	DATEDIFF(MONTH, MIN(order_date), MAX(order_date)) AS order_range_months,
+	DATEDIFF(DAY, MIN(order_date), MAX(order_date)) AS order_range_days
 FROM gold.fact_sales
 
 
@@ -61,21 +82,21 @@ FROM gold.dim_customers
 
 
 
--- What birthdate is shared by the most customers?
+-- Birthdate  Shared by Most Customers Using CTE
 
 
---CTE
+	--CTE
 
 WITH CTE_birthdate_customer_count AS
-(
-SELECT 
-	COUNT(*) AS customer_count,
-	birthdate 
-FROM gold.dim_customers
-GROUP BY birthdate
-)
+	(
+	SELECT 
+		COUNT(*) AS customer_count,
+		birthdate 
+	FROM gold.dim_customers
+	GROUP BY birthdate
+	)
 
---Main Query 
+	--Main Query 
 
 SELECT TOP 1 
 	birthdate,
@@ -85,6 +106,7 @@ FROM CTE_birthdate_customer_count AS customer_count_highest_birthday
 ORDER BY customer_count DESC
 
 
+	
 /*
 *********************************
 Measure Exploration 
@@ -109,27 +131,27 @@ FROM gold.fact_sales
 
 --Total Number of Orders
 SELECT 
-COUNT(DISTINCT order_number) AS total_dist_order_number
+	COUNT(DISTINCT order_number) AS total_dist_order_number
 FROM gold.fact_sales
 
 --Total Number of Products
 SELECT
-COUNT(product_id) AS total_num_products
+	COUNT(product_id) AS total_num_products
 FROM gold.dim_products
 
 
 --Total Number of Customers
 SELECT 
-COUNT(customer_id) AS total_num_customers
+	COUNT(customer_id) AS total_num_customers
 FROM gold.dim_customers
 
 --Total Number of Customers that have placed orders 
 
 SELECT
-COUNT(DISTINCT customer_key) AS total_customer_with_orders
+	COUNT(DISTINCT customer_key) AS total_customer_with_orders
 FROM gold.fact_sales
 
---Report of all key metrics 
+--Report of All Metrics 
 
 SELECT 'Total Sales' as measure_name,SUM(sales_total) AS measure_value FROM gold.fact_sales
 UNION ALL 
@@ -149,8 +171,7 @@ SELECT 'Total Customers with Orders' as measure_name, COUNT(customer_key) AS mea
 *********************************
 Magnitude Analysis 
 *********************************
--comparison of measure value by dimensions
--purpose is to understand the importance or weight of dimensions
+-Comparison of measure value by dimensions
 
 */
 
@@ -270,7 +291,8 @@ ON f.product_key = p.product_key
 GROUP BY p.subcatagory 
 ORDER BY total_revenue 
 
---Ranking Using Window Function 
+--Ranking Using Window Function
+	--Useful for adding details, selecting columns or specific rows by rank 
 SELECT * 
 FROM (
 	SELECT 
