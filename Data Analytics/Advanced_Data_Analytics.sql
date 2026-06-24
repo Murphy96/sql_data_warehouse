@@ -58,7 +58,7 @@ ORDER BY FORMAT(order_date, 'yyy-MMM')
 
 --Cumulative Analysis 
 --Aggregates data progressively over time
---contextualizes business metrics 
+--Contextualizes business metrics 
 --Cumulative Measure by date dimension 
 
 
@@ -84,17 +84,17 @@ FROM
 ORDER BY DATETRUNC(MONTH, order_date)
 
 
---Rolling Average of Price (Equally Weighted by Month, Partitioned by Year)
+--Rolling Average of Sales Totals by Month 
 SELECT 
 	order_date, 
 	total_sales, 
 	--window function
-	AVG(total_sales) OVER
-	(PARTITION BY DATETRUNC(YEAR,order_date) 
-	ORDER BY order_date
-	ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
-	) AS rolling_avg_sales
+	AVG(total_sales) OVER (
+		ORDER BY order_date
+		ROWS BETWEEN 2 PRECEDING AND CURRENT ROW
 		--default frame is summation of unbounded preceding and current row
+	) AS rolling_avg_sales
+		
 FROM
 	(
 	SELECT 
