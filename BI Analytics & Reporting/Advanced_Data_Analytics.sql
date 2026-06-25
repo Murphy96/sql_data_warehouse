@@ -13,6 +13,11 @@ Performs the following analytics:
 	4) Part-to-Whole Analysis 
 	5) Data Segmentation 
 
+Usage: 
+	This file is a collection of independent scripts. The file is not meant for producing a single report. For best
+	performance, run each query seperately, as needed, within SQL Server Management Studio, against the data warehouse within
+	this repository. 
+
 */
 
 
