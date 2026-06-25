@@ -22,10 +22,14 @@ Usage:
 
 
 
---Change-over-time analysis 
---Analyze how a measure evolves over time
---tracks trends and identifies seasonality in data
---Aggregation of a measure by a date dimension
+/*
+***************************************************
+1) Change-Over-Time Analysis 
+***************************************************
+	- Analyzes evolution of a measure over time
+	- Tracks trends and identifies seasonality in data
+	- Aggregation of a [Measure] by a [Date Dimension]
+*/
 
 
 SELECT 
@@ -70,15 +74,18 @@ WHERE order_date IS NOT NULL
 GROUP BY FORMAT(order_date, 'yyy-MMM')
 ORDER BY FORMAT(order_date, 'yyy-MMM')
 
---Cumulative Analysis 
---Aggregates data progressively over time
---contextualizes business metrics 
---Cumulative Measure by date dimension 
+/*
+***************************************************
+2) Cumulative Analysis 
+***************************************************
+	- Aggregates data progressively over time
+	- Contextualizes business metrics 
+	- Cumulative [Measure] by [Date Dimension] 
+*/
 
 
-
---Total sales per month 
---Running Total
+--Total Sales per Month 
+	--Running Total
 SELECT 
 	order_date, 
 	total_sales, 
@@ -118,26 +125,28 @@ FROM
 	GROUP BY DATETRUNC(MONTH, order_date)
 	)t
 
-	--Performance Analysis 
-	-- Comparing the current value to a target value 
-	-- measures success and compares performance 
-	--Current[Measure] - Target[Measure]
+/*
+***************************************************
+3) Performance Analysis 
+***************************************************
+	- Compares the current value to a target value 
+	- Measures success and compares performance 
+	- Current[Measure] - Target[Measure]
+*/
 
-
-
-	--Yearly Performance of products compared to each product's sales to both it's average sales performance previous year's sales performance 
+--Yearly Performance of products compared to each product's sales to both it's average sales performance previous year's sales performance 
 	
 	--CTE
-	WITH yearly_product_sales AS(
-		SELECT 
-			YEAR(f.order_date) AS order_year, 
-			p.product_name, 
-			SUM(f.sales_total) AS total_product_sales_by_year
-		FROM gold.fact_sales f
-		LEFT JOIN gold.dim_products p
-		ON f.product_key=p.product_key
-		WHERE f.order_date IS NOT NULL
-		GROUP BY YEAR(f.order_date), p.product_name
+WITH yearly_product_sales AS(
+	SELECT 
+		YEAR(f.order_date) AS order_year, 
+		p.product_name, 
+		SUM(f.sales_total) AS total_product_sales_by_year
+	FROM gold.fact_sales f
+	LEFT JOIN gold.dim_products p
+	ON f.product_key=p.product_key
+	WHERE f.order_date IS NOT NULL
+	GROUP BY YEAR(f.order_date), p.product_name
 	
 	)
 	--Query 
@@ -161,10 +170,14 @@ SELECT
 FROM yearly_product_sales
 ORDER BY product_name, order_year
 
---Part-to-Whole Analyis 
---Examine an how an individual part is performing compared to the overall
---Examines impact of category on the buisness 
---Measure/Total Measure *100 by Dimension 
+/*
+***************************************************
+4) Part-to-Whole Analyis 
+***************************************************
+	- Examines an individual part's performance compared to the overall performance
+	- Examines impact of category on the buisness 
+	- [Measure]/[Total Measure] *100 by [Dimension] 
+*/
 
 
 -- Catagories contributing most to overall sales 
@@ -186,12 +199,18 @@ SELECT
 FROM catagory_sales 
 ORDER BY total_sales DESC
 
---Data Segmentation
---Group data based on a specific range
---Analysis of the correlation between two measures 
--- Creating a Dimension from a Measure 
---[Measure] By [Measure] 
+/*
+***************************************************
+5) Data Segmentation
+***************************************************
+	- Group data based on a specific range
+	- Analysis of the correlation between two measures 
+	- Creating a Dimension from a Measure 
+	- [Measure] By [Measure] 
 
+*/
+
+	
 --Segmenation of products into cost ranges and count of products in each segment 
 
 WITH product_segments AS (
