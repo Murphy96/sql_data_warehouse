@@ -1,8 +1,17 @@
 /*
+***********************************************************************************
+Scripts for Advanced Analysis (Run on Gold Layer) 
+***********************************************************************************
 
-Advanced Analytics For Datawarehouse project
+Purpose: 
+	A collect of scripts for performing 5 major catagories of BI Analysis 
 
-*******Working Draft***************
+Performs the following analytics: 
+	1) Change-Over-Time Analysis
+	2) Cumulative Analysis 
+	3) Performance Analysis
+	4) Part-to-Whole Analysis 
+	5) Data Segmentation 
 
 */
 
